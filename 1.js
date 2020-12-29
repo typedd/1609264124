@@ -5,6 +5,8 @@ const createRequest = require('./createRequest');
 // $FlowFixMe
 const identityService = require('./identityService');
 
+module.exports = pub;
+
 /*::
 import type {
     RequestParams,
@@ -69,5 +71,3 @@ const pub/*: ({| ...CreateRequestOptions, gatewayConfig: GatewayConfig |}) => (R
         };
     }
 }
-
-module.exports = pub;
