@@ -1,0 +1,113 @@
+// @flow
+
+export type UrlString = string;
+
+export type AccessToken = string
+
+export type ParsedUrl = {|
+	fullUrl: string,
+	host: string,
+	serviceName: string,
+	isGatewayUrl: boolean
+|}
+
+export type RequestContext = {
+	traceId: any,
+	spanId: any,
+	parentSpanId: any,
+	extendedLogs: any,
+	sampled: any
+}
+
+export type Options = {|
+	brand?: string,
+	circuitBreak?: ?CircuitBreakOptions,
+	defaults?: any,
+	gatewayHost?: string,
+	parseJSON?: ?boolean,
+	retry?: any,
+	requestContext?: RequestContext,
+	identityName?: string,
+	identitySecret?: string,
+	identityTimeout?: string,
+	responseErrorHandler?: any
+|}
+
+// TODO there might be other options in circuitBreak; but the type is a closed object
+export type CircuitBreakOptions = {|
+    circuitBreakerForceOpened?: ?boolean,
+    fallbackTo?: ?Function
+|};
+
+export type CreateRequestOptions = {|
+	defaults?: {},
+	parseJSON?: boolean,
+	responseErrorHandler?: Function,
+	circuitBreak?: CircuitBreakOptions,
+	retry?: boolean
+|}
+
+export type GatewayConfig = {|
+	brand: string,
+	gatewayHost: string,
+	identityName?: string,
+	identitySecret?: string,
+	identityTimeout?: string
+|}
+
+export type MtgRequestParams = UrlString | _MtgRequestParams
+export type _MtgRequestParams = { url: UrlString }
+
+export type RequestParams = {
+    method?: string,
+    agentOptions?: any,
+	headers?: Headers,
+	url: string,
+	host: string,
+	serviceName: string,
+	commandKey: string, // needed for circuitBraker
+	qs?: any,
+    time?: boolean,
+    json?: any
+}
+
+export type AxiosParams = {
+	...RequestParams,
+    data?: any,
+    params?: any
+}
+
+export type TraceHeaders = {|
+	'X-B3-TraceId': string,
+	'X-B3-SpanId': string,
+	'X-B3-ParentSpanId': string,
+	'X-B3-Flags'?: string,
+	'X-B3-Sampled'?: string
+|} | $Shape<{||}>
+
+export type AuthHeaders = {|
+	authorization?: string
+|}
+
+export type GatewayHeaders = {|
+	'X-Gateway-Throttling'?: string
+|}
+
+export type OutsideRequestHeaders = { ...TraceHeaders, ...AuthHeaders, ...GatewayHeaders }
+export type InsideRequestHeaders = { ...TraceHeaders }
+
+export type InsideRequestParams  = { ...RequestParams, headers:  InsideRequestHeaders }
+export type OutsideRequestParams = { ...RequestParams, headers: OutsideRequestHeaders }
+
+export type MtgResponse = {|
+    statusCode: any,
+    headers: any,
+    body: any,
+    params: any,
+    responseTime: number
+|}
+
+export type MtgRequestError = {|
+    message: string,
+    url?: UrlString
+|}
