@@ -47,7 +47,7 @@ const authorize/*: (config: GatewayConfig) => Promise< AccessToken > */ = (confi
 		throw err;
 	});
 
-const pub/*: ({| ...CreateRequestOptions, gatewayConfig: GatewayConfig |}) => (RequestParams => Promise<MtgResponse>) */ = (config) => {
+function pub/*: ({| ...CreateRequestOptions, gatewayConfig: GatewayConfig |}) => (RequestParams => Promise<MtgResponse>) */ (config) {
     // $FlowFixMe
     const request = createRequest(config);
 
