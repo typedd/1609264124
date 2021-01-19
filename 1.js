@@ -45,9 +45,9 @@ const authorize/*: (config: GatewayConfig) => Promise< AccessToken > */ = (confi
 	.catch((err) => {
 		identityService.removeAccessToken(config.identityName);
 		throw err;
-	});
+    });
 
-function pub/*: ({| ...CreateRequestOptions, gatewayConfig: GatewayConfig |}) => (RequestParams => Promise<MtgResponse>) */ (config) {
+function pub(config/*: {| ...CreateRequestOptions, gatewayConfig: GatewayConfig |} */)/*: (RequestParams => Promise<MtgResponse>) */ {
     // $FlowFixMe
     const request = createRequest(config);
 
