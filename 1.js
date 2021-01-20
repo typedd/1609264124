@@ -5,6 +5,7 @@ const createRequest = require('./createRequest');
 // $FlowFixMe
 const identityService = require('./identityService');
 
+// TODO: The pub var is not necessary now at all. It can be inlined. (https://refactoring.com/catalog/inlineVariable.html)
 module.exports = pub;
 
 /*::
