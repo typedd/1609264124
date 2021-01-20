@@ -5,6 +5,7 @@ const createRequest = require('./createRequest');
 // $FlowFixMe
 const identityService = require('./identityService');
 
+// TODO: The pub var is not necessary now at all. It can be inlined. (https://refactoring.com/catalog/inlineVariable.html)
 module.exports = pub;
 
 /*::
@@ -45,9 +46,9 @@ const authorize/*: (config: GatewayConfig) => Promise< AccessToken > */ = (confi
 	.catch((err) => {
 		identityService.removeAccessToken(config.identityName);
 		throw err;
-	});
+    });
 
-const pub/*: ({| ...CreateRequestOptions, gatewayConfig: GatewayConfig |}) => (RequestParams => Promise<MtgResponse>) */ = (config) => {
+function pub(config/*: {| ...CreateRequestOptions, gatewayConfig: GatewayConfig |} */)/*: (RequestParams => Promise<MtgResponse>) */ {
     // $FlowFixMe
     const request = createRequest(config);
 
